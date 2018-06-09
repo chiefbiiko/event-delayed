@@ -1,16 +1,23 @@
 var EventEmitter = require('events').EventEmitter
 
-// TODO: unregister function return 4 all my event-x modules
+function listen (toHead, eventName, delay, listener) {
+  function proxy (...args) {
+    setTimeout(listener, delay, ...args)
+  }
+  this._delayedListenersMap.set(listener, proxy)
+  if (toHead) this.prependListener(eventName, proxy)
+  else this.addListener(eventName, proxy)
+}
 
-function onDelayed (event, delay, handler) {
-  this.on(event, function proxy (...args) {
-    setTimeout(handler, delay, ...args)
-  })
+function unlisten (eventName, listener) {
+  this.removeListener(eventName, this._delayedListenersMap.get(listener))
 }
 
 function delayify (emitter) {
-  // duck check...
-  emitter.onDelayed = onDelayed
+  if (!emitter._delayedListenersMap) emitter._delayedListenersMap = new Map()
+  emitter.onDelayed = emitter.addDelayedListener = listen.bind(emitter, false)
+  emitter.prependDelayedListener = listen.bind(emitter, true)
+  emitter.offDelayed = emitter.removeDelayedListener = unlisten.bind(emitter)
   return emitter
 }
 

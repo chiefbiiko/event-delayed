@@ -1,0 +1,28 @@
+{
+  "name": "event-delayed",
+  "version": "0.0.0",
+  "description": "register delayed event handlers",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiefbiiko/event-delayed.git"
+  },
+  "keywords": [
+    "events",
+    "emitter",
+    "delay",
+    "time"
+  ],
+  "author": "Noah Anabiik Schwarz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chiefbiiko/event-delayed/issues"
+  },
+  "homepage": "https://github.com/chiefbiiko/event-delayed#readme",
+  "devDependencies": {
+    "tape": "^4.9.1"
+  }
+}
