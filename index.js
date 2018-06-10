@@ -1,4 +1,6 @@
-var EventEmitter = require('events').EventEmitter
+/* TODO
+ + incorporate once for registering
+*/
 
 function listen (toHead, eventName, delay, listener) {
   function proxy (...args) {
